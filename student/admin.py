@@ -5,3 +5,5 @@ from .models import *
 
 admin.site.register(className)
 admin.site.register(student)
+admin.site.register(subjects)
+admin.site.register(subject_com)

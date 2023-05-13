@@ -14,9 +14,23 @@ class student(models.Model):
     email=models.CharField(max_length=100)
     gendar=models.CharField(max_length=100)
     dob=models.CharField(max_length=100)
-    reg_date=models.TimeField(auto_created=True)
-
+    reg_date=models.TimeField(auto_now_add=True)
     
+class subjects(models.Model):
+    subject_id=models.AutoField(primary_key=True)
+    subject_name=models.CharField(max_length=100)
+    subject_code=models.CharField(max_length=100) 
+
+class subject_com(models.Model):
+    subject_com_id=models.AutoField(primary_key=True)
+    class_id=models.ForeignKey(className,on_delete=models.CASCADE)
+    subject_id=models.ForeignKey(subjects,on_delete=models.CASCADE)
+
+class result(models.Model):
+    result_id=models.AutoField(primary_key=True)
+    student_id=models.ForeignKey(student,on_delete=models.CASCADE)    
+    class_id=models.ForeignKey(className,on_delete=models.CASCADE)
+    subject_id=models.ForeignKey(subjects,on_delete=models.CASCADE)
 
 
 
