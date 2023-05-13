@@ -350,3 +350,45 @@ def submit_subject_updated_data(request,subject_id):
 def manage_subject_com(request):
     data=subject_com.objects.all()
     return render(request,"subject_com/manage_subject_com.html",{'data':data})
+
+def delete_subject_com(request,subject_com_id):
+    data=subject_com.objects.get(subject_com_id=subject_com_id)
+    data.delete()
+    return redirect('/adminpanel/manage_subject_com')
+
+def manage_add_subject_com(request):
+    class_data=className.objects.all()
+    subject_data=subjects.objects.all()
+    return render(request,"subject_com/manage_subject_com_add.html",{'class_data':class_data,'subject_data':subject_data})
+
+def subject_com_submit_data(request):
+    if request.method=="POST":
+        class_name=request.POST.get('class_name')
+        subject_name=request.POST.get('subject_name')
+        class_data=className.objects.get(class_name=class_name)
+        class_id=class_data.class_id
+        subject_data=subjects.objects.get(subject_name=subject_name)
+        subject_id=subject_data.subject_id
+        data=subject_com(
+            class_id=className.objects.get(class_id=class_id),
+            subject_id=subjects.objects.get(subject_id=subject_id)
+        )
+        data.save()
+        return redirect('/adminpanel/manage_subject_com')
+
+#manage_result
+def manage_result(request):
+    data=result.objects.all()
+    return render(request,"result/manage_result.html",{'data':data})
+
+def addresult(request):
+    class_data=className.objects.all()
+    class_student=student.objects.all()
+    class_subject=subjects.objects.all()
+    return render(request,"result/manage_result_add.html",{'class_data':class_data,'class_student':class_student,'class_subject':class_subject})
+
+def delete_result(request,result_id):
+    data=result.objects.get(result_id=result_id)
+    data.delete()
+    return redirect('/adminpanel/manage_result')
+

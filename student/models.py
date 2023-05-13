@@ -27,10 +27,11 @@ class subject_com(models.Model):
     subject_id=models.ForeignKey(subjects,on_delete=models.CASCADE)
 
 class result(models.Model):
-    result_id=models.AutoField(primary_key=True)
-    student_id=models.ForeignKey(student,on_delete=models.CASCADE)    
+    result_id=models.AutoField(primary_key=True)    
     class_id=models.ForeignKey(className,on_delete=models.CASCADE)
+    student_id=models.ForeignKey(student,on_delete=models.CASCADE)
     subject_id=models.ForeignKey(subjects,on_delete=models.CASCADE)
+    marks=models.CharField(max_length=100)
 
 
-
+ 
