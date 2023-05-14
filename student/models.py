@@ -33,5 +33,9 @@ class result(models.Model):
     subject_id=models.ForeignKey(subjects,on_delete=models.CASCADE)
     marks=models.CharField(max_length=100)
 
-
+class Feedback(models.Model):
+    Feedback_id=models.AutoField(primary_key=True)
+    roll_no=models.CharField(max_length=100)
+    Feedback_data=models.CharField(max_length=500)
+    rating=models.CharField(max_length=100)
  

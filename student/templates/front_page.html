@@ -16,47 +16,49 @@
             <div class="container">
                 <h1 align="center">Student Result </h1>
             <form action="/show_result" action="post">
-              {% csrf_token %}
-                <div class="container mt-5 mx-5">
-                      <div class="col-md-4 mt-4">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Your Email"
-                          name="email"
-                          required
-                        />
-                      </div>
-                      <div class="col-md-4 mt-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="validationCustom05"
-                          placeholder="Enter Your Roll Number"
-                          name="roll_no"
-                          required
-                        />
-                      </div>
-                      <div class="col-md-4 mt-3">
-                        <div class="form-group">
-                            <select class="form-select form-select" name="class_name" aria-label=".form-select-sm example">
-                            <option  name="class_name">Select Your Class</option>
-                            {%if data%}
-                               {%for i in data%}
-                               <option name="class_name">{{i.class_name}}</option>
-                               {%endfor%}
-                            {%else%}
-                            <option name="class_name">You are not allow</option>
-                            {%endif%}
-                            </select>
-                        </div>  
-                      </div>
-                      <div class="col-md-3 mt-4">
-                        <button class="btn btn-primary" type="submit" >
-                          Check Result
-                        </button>
-                      </div>
-                  </div>
+              {% csrf_token %} 
+                <div class="text-center">
+                  <div class="container mt-5 mx-5">
+                    <div class="col-md-4 mt-4">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Your Email"
+                        name="email"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-4 mt-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="validationCustom05"
+                        placeholder="Enter Your Roll Number"
+                        name="roll_no"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-4 mt-3">
+                      <div class="form-group">
+                          <select class="form-select form-select" name="class_name" aria-label=".form-select-sm example">
+                          <option  name="class_name">Select Your Class</option>
+                          {%if data%}
+                             {%for i in data%}
+                             <option name="class_name">{{i.class_name}}</option>
+                             {%endfor%}
+                          {%else%}
+                          <option name="class_name">You are not allow</option>
+                          {%endif%}
+                          </select>
+                      </div>  
+                    </div>
+                    <div class="col-md-3 mt-4">
+                      <button class="btn btn-primary" type="submit" >
+                        Check Result
+                      </button>
+                    </div>
+                </div>
+                </div>
             </form>
     </body>
 </html>
