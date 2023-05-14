@@ -15,7 +15,8 @@
         <div class="container">
             <div class="container">
                 <h1 align="center">Student Result </h1>
-            <form >
+            <form action="/show_result" action="post">
+              {% csrf_token %}
                 <div class="container mt-5 mx-5">
                       <div class="col-md-4 mt-4">
                         <input

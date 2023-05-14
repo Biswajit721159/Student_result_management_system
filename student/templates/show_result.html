@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+    {% if data%}
+    <div class="container mt-4">
+      <h3 class="text-center" style="color:blue;">Rohini C.R.D High School (H.S)</h3>
+      <h5 class="text-center" style="color:blue;">(A Govt. Sponsored School)</h5>
+      <div class="text-center">
+        <img  src="https://i.ibb.co/LxkhTt2/Rohini-LOGO.jpg" alt="error loading">
+      </div>
+    </div>
+   <div class="container mt-3" style="background-color:light;" >
+    <h5 >Student Name : {{student_name}}</h5>
+    <h5 >Roll No : {{roll_no}}</h5>
+    <h5>Student Class :-{{class_name}}</h5>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Subject Name</th>
+          <th scope="col">Subject Code</th>
+          <th scope="col">Marks</th>
+          <th scope="col">Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data%}
+        <tr class=" container mt-5">
+          <th>{{i.subject_id.subject_name}}</th>
+          <td>{{i.subject_id.subject_code}}</td>
+          <td>{{i.marks}}</td>
+          <td>
+            {% if i.marks <= "100" and i.marks >= "90" %}
+            AA
+            {% elif i.marks < "90" and i.marks >= "80" %}
+            A+
+            {%elif i.marks < "80" and i.marks >= "70"%}
+              A
+            {%elif i.marks < "70" and i.marks >= "50"%}  
+            B
+            {%elif i.marks < "50" and i.marks >= "25"%}
+            C
+            {%else%}
+            D
+            {%endif%}
+          </td>
+        </tr>
+        {%endfor%}
+        <tr>
+          <th scope="row">Total Marks</th>
+          <td></td>
+          <td><strong>{{total_marks}}</strong> out of <strong>{{fullmarks}}</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Percentage Obtained</th>
+          <td></td>
+          <td>{{percentage}}%</td>
+          <td>
+            {% if percentage <= "100.00" and percentage >= "90.00" %}
+            AA
+            {% elif percentage < "90.00" and percentage >= "80.00" %}
+            A+
+            {%elif percentage < "80.00" and percentage >= "70.00"%}
+              A
+            {%elif percentage < "70" and percentage >= "50"%}  
+            B
+            {%elif percentage < "50" and percentage >= "25"%}
+            C
+            {%else%}
+            D
+            {%endif%}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Result Sataus </th>
+          <td></td>
+          <td>
+            {% if result_status%}
+            FAIL
+            {%else%}
+            PASS
+            {%endif%}
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Downlode Result</th>
+          <td></td>
+          <td><button class="btn btn-success btn-sm" onclick ="window.print()">Download</button></td>
+          <td></td>
+        </tr>
+    </table>
+    {% comment %} <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Total Marks</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead> {% endcomment %}
+      {% comment %} <tbody>
+        <tr>
+          <th scope="row">Total Number</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody> {% endcomment %}
+    </table>
+   </div>
+    {%else%}
+    <h1> Result is not out<h1>
+    {%endif%}
+  </body>
+</html>

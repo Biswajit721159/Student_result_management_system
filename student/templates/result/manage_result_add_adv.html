@@ -26,44 +26,46 @@
           </div>  
           </div>
         </div> 
-            <form action="/adminpanel/manage_result/search_class_name_to_add" method="post">
+            <form action="/adminpanel/manage_result/{{class_name}}/manage_result_add_data" method="post">
               {% csrf_token %}
               <div class="col-md-4 mt-3">
                   <div class="form-group">
-                    <label>class_name</label>
-                    <select class="form-select form-select-sm" name="class_name" aria-label=".form-select-sm example">
-                    <option  name="class_name">Select Class</option>
-                    {%if class_data%}
-                       {%for i in class_data%}
-                       <option name="class_name">{{i.class_name}}</option>
-                       {%endfor%}
-                    {%else%}
-                    <option name="class_name">You are not allow</option>
-                    {%endif%}
-                    </select>
+                    <label>Class Name</label>
+                    <input type="text" name="class_name" class="form-control" disabled placeholder="Enter Student Name" value={{class_name}}  required>
                 </div>  
               </div>  
 
-              {% comment %} {% if class_id %}
+           
               <div class="col-md-4 mt-3">
                 <div class="form-group">
-                  <label>class_name</label>
-                  <select class="form-select form-select-sm" name="class_id" aria-label=".form-select-sm example">
-                  <option  name="class_id">Select Class</option>
-                  {%if class_data%}
-                     {%for i in class_data%}
-                     <option name="class_id">{{i.class_name}}</option>
+                  <select class="form-select form-select-sm" name="student_name" aria-label=".form-select-sm example">
+                  <option  name="student_name">Select student</option>
+                  {%if student_data%}
+                     {%for i in student_data%}
+                     <option name="student_name">{{i.name}}</option>
                      {%endfor%}
                   {%else%}
-                  <option name="class_id">You are not allow</option>
+                  <option name="student_name">You are not allow</option>
                   {%endif%}
                   </select>
               </div>  
             </div> 
-            {%endif%}  {% endcomment %}
-                
+
+
+            <div class="col-md-4 mt-3">
+                <div class="form-group">
+                  <label>Subject*</label>
+                  {%if subject_data%}
+                     {%for i in subject_data%}
+                     <input type="text" name="{{i.subject_id.subject_name}}" class="form-control mt-2"  placeholder="Enter {{i.subject_id.subject_name}} Marks"  required>
+                     {%endfor%}
+                  {%else%}
+                  {%endif%}
+              </div>  
+            </div> 
+            
             <div >
-              <input type="submit" class="btn btn-success mx-2 mt-3" value="Add Search">
+              <input type="submit" class="btn btn-success mx-2 mt-3" value="Add Result">
             </div>
             </form>
             <div class="mt-1 mb-5 pb-1">

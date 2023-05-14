@@ -33,7 +33,28 @@ def connect(request):
         return HttpResponse("Something is wrong")
     
 def dashboard(request):
-    return render(request, "dashboard.html")    
+    class_data=className.objects.all()
+    student_data=student.objects.all()
+    subject_data=subjects.objects.all()
+    result_data=result.objects.all()
+    set1 = set()
+    for i in result_data:
+        set1.add(i.student_id.student_id)    
+    set2=set()
+    for i in set1:
+        for j in result_data:
+            if(j.student_id.student_id)==i :
+                if int(j.marks)<=25:
+                    set2.add(i)
+    context={
+        'total_class':len(class_data),
+        'total_student':len(student_data),
+        'total_subject':len(subject_data),
+        'Total_result':len(set1),
+        'Total_pass_candidates':len(set1)-len(set2),
+        'Total_XP_candidates':len(set2),
+    }
+    return render(request, "dashboard.html",context)    
 
 def Logout(request):
     logout(request)
@@ -383,12 +404,42 @@ def manage_result(request):
 
 def addresult(request):
     class_data=className.objects.all()
-    class_student=student.objects.all()
-    class_subject=subjects.objects.all()
-    return render(request,"result/manage_result_add.html",{'class_data':class_data,'class_student':class_student,'class_subject':class_subject})
+    return render(request,"result/manage_result_add.html",{'class_data':class_data})
+
+def search_class_name_to_add(request):
+    if request.method=="POST":
+        class_name=request.POST.get('class_name')
+        class_data=className.objects.get(class_name=class_name)
+        student_data=student.objects.filter(class_id=class_data.class_id)
+        subject_data=subject_com.objects.filter(class_id=class_data.class_id)
+        return render(request,"result/manage_result_add_adv.html",{'class_name':class_name,'student_data':student_data,'subject_data':subject_data})
+    else:return HttpResponse("Wait sometime")
 
 def delete_result(request,result_id):
     data=result.objects.get(result_id=result_id)
     data.delete()
     return redirect('/adminpanel/manage_result')
+
+
+def manage_result_add_data(request,class_name):
+    if request.method=="POST":
+
+        student_name=request.POST.get('student_name')
+        class_data=className.objects.get(class_name=class_name)
+        subject_data=subject_com.objects.filter(class_id=class_data.class_id)
+
+        for i in subject_data:
+            s=i.subject_id.subject_name
+            s2=request.POST.get(s)
+            data=result(
+                class_id=className.objects.get(class_name=class_name),
+                student_id=student.objects.get(name=student_name),
+                marks=s2,
+                subject_id=subjects.objects.get(subject_name=s)
+            )
+            data.save()
+        return redirect('/adminpanel/manage_result')
+    return HttpResponse("Hello World!")
+
+
 

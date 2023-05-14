@@ -55,11 +55,13 @@ urlpatterns = [
     path('manage_subject_com',views.manage_subject_com),
     path('manage_subject_com/delete/<int:subject_com_id>',views.delete_subject_com),
     path('manage_subject_com/add_subject_com',views.manage_add_subject_com),
-     path('manage_subject_com/subject_com_submit_data',views.subject_com_submit_data),
+    path('manage_subject_com/subject_com_submit_data',views.subject_com_submit_data),
 
 
     #manage_result
     path('manage_result',views.manage_result),
+    path('manage_result/<str:class_name>/manage_result_add_data',views.manage_result_add_data),
     path('manage_result/addresult',views.addresult),
     path('manage_result/delete/<int:result_id>',views.delete_result),
+    path('manage_result/search_class_name_to_add',views.search_class_name_to_add),
 ]
