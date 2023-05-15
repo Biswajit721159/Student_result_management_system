@@ -67,7 +67,7 @@
             <div class="table-title" style="width: 85%;margin-left: 0%" >
                 <div class="row">
                     <div class="col-sm-6">
-                      <h2>Manage <b>Users</b></h2>
+                      <h2>Manage <b>Class</b></h2>
                     </div>
                     <div class="col-sm-7">
                         <a href="/adminpanel/manageclass/addclass" class="btn btn-success btn-sm"><span>Add Class</span></a>	
@@ -80,12 +80,11 @@
                 <table class="table table-striped table-hover" style="width:85%;margin-left:0%;margin-top:2%">
                     <thead>
                         <tr>
-                            <th>class_id</th>
-                            <th>class_name</th>
-                            <th>section</th>
-                            <th>class_name_numeric</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center">class_id</th>
+                            <th class="text-center">class_name</th>
+                            <th class="text-center">class_name_numeric</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,9 +94,6 @@
                         </form>
                         <form action="/adminpanel/manageclass/search_class_name" method="GET">
                             <td><input type="search" class="searchInput" name="class_name" class="form-control" placeholder="Search class_name" aria-label="Search" /></td>
-                        </form>
-                        <form action="/adminpanel/manageclass/search_section" method="GET">
-                            <td><input type="search" class="searchInput" name="section" class="form-control" placeholder="Search section" aria-label="Search" /></td>
                         </form>
                         <form action="/adminpanel/manageclass/search_class_name_numeric" method="GET">
                             <td><input type="search" class="searchInput" name="class_name_numeric" class="form-control" placeholder="Search class_name_numeric" aria-label="Search" /></td>
@@ -109,7 +105,6 @@
                                 <tr>
                                     <td>{{i.class_id}}</td>
                                     <td>{{i.class_name}}</td>
-                                    <td>{{i.section}}</td>
                                     <td>{{i.class_name_numeric}}</td>
                                     <td>
                                         <a href="/adminpanel/manageclass/update/{{i.class_id}}" class="edit" ><button class="btn btn-primary btn-sm">Edit</button></a>

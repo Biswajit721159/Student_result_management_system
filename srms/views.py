@@ -68,4 +68,19 @@ def Feedback_from(request,roll_no):
      )
      data.save()
      return render(request,"success.html")
+   
+def Reviews__(request,roll_no):
+   return render(request,"Reviews.html",{'roll_no':roll_no})  
+
+
+csrf_exempt
+def Reviews_from(request,roll_no):
+   if request.method=="POST":
+     Reviews_data=request.POST.get('Reviews_data')
+     data=Reviews(
+        Reviews_data=Reviews_data,
+        roll_no=roll_no,
+     )
+     data.save()
+   return render(request,"success.html")
 

@@ -192,6 +192,18 @@
             <span class="links_name">Manage Result</span>
           </a>
         </li>
+        <li>
+          <a href="/adminpanel/manage_reviews">
+            <i class='bx bx-box' ></i> 
+            <span class="links_name">Manage Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a href="/adminpanel/manage_feedback">
+            <i class='bx bx-box' ></i> 
+            <span class="links_name">Manage Feedback</span>
+          </a>
+        </li>
         <li class="log_out">
           <a href="/adminpanel/logout">
             {% comment %} <i class='bx bx-log-out'></i> {% endcomment %}
@@ -241,6 +253,18 @@
           <div class="right-side">
             <div class="box-topic"  >Total XP candidates</div>
             <div class="number">{{Total_XP_candidates}}</div>
+          </div>  
+        </div>
+        <div class="box" style="margin-top:13px">
+          <div class="right-side">
+            <div class="box-topic"  >Total Reviews</div>
+            <div class="number">{{total_reviews}}</div>
+          </div>  
+        </div>
+        <div class="box" style="margin-top:13px">
+          <div class="right-side">
+            <div class="box-topic"  >Total Feedback</div>
+            <div class="number">{{total_feedback}}</div>
           </div>  
         </div>
         

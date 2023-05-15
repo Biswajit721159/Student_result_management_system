@@ -15,6 +15,23 @@ from .models import*
 def index(request):
     return render(request, "Admin_login.html")
 
+def manage_reviews(request):
+    data=Reviews.objects.all()
+    return render(request,"manage_reviews.html",{'data':data})
+
+def delete_Reviews(request,Reviews_id):
+     data=Reviews.objects.get(Reviews_id=Reviews_id)
+     data.delete()
+     return redirect('/adminpanel/manage_reviews')
+
+def manage_feedback(request):
+    data=Feedback.objects.all()
+    return render(request,"manage_feedback.html",{'data':data})
+
+def delete_feedback(request,Feedback_id):
+    data=Feedback.objects.get(Feedback_id=Feedback_id)
+    data.delete()
+    return redirect('/adminpanel/manage_feedback')
 
 @csrf_exempt
 def connect(request):
@@ -37,6 +54,8 @@ def dashboard(request):
     student_data=student.objects.all()
     subject_data=subjects.objects.all()
     result_data=result.objects.all()
+    total_reviews=Reviews.objects.all()
+    total_feedback=Feedback.objects.all()
     set1 = set()
     for i in result_data:
         set1.add(i.student_id.student_id)    
@@ -53,6 +72,9 @@ def dashboard(request):
         'Total_result':len(set1),
         'Total_pass_candidates':len(set1)-len(set2),
         'Total_XP_candidates':len(set2),
+        'total_reviews':len(total_reviews),
+        'total_feedback':len(total_feedback),
+
     }
     return render(request, "dashboard.html",context)    
 
@@ -77,18 +99,16 @@ def addclass(request):
 def submit_data(request):
     if request.method=="POST":
         class_name=request.POST.get('class_name')
-        section=request.POST.get('section')
         class_name_numeric=request.POST.get('class_name_numeric')
         data=className(
             class_name=class_name,
-            section=section,
             class_name_numeric=class_name_numeric,
         )
         data.save()
         return redirect('/adminpanel/manageclass')
     return HttpResponse("Wait sometime")
 
-def manage_search_class_id(request):
+def manageclass_search_class_id(request):
     if request.method=="GET":
         class_id=request.GET.get('class_id')
         classNamedata=className.objects.all()
@@ -98,7 +118,7 @@ def manage_search_class_id(request):
                 data.append(i)
         return render(request,"Manage_class.html",{'data':data})
     
-def manage_search_class_name(request):
+def manageclass_search_class_name(request):
     if request.method=="GET":
         class_name=request.GET.get('class_name')
         classNamedata=className.objects.all()
@@ -108,17 +128,7 @@ def manage_search_class_name(request):
                 data.append(i)
         return render(request,"Manage_class.html",{'data':data})
 
-def manage_search_section(request):
-    if request.method=="GET":
-        section=request.GET.get('section')
-        classNamedata=className.objects.all()
-        data=[]
-        for i in classNamedata:
-            if str(i.section)==str(section):
-                data.append(i)
-        return render(request,"Manage_class.html",{'data':data})
-
-def manage_search_class_name_numeric(request):
+def manageclass_search_class_name_numeric(request):
     if request.method=="GET":
         class_name_numeric=request.GET.get('class_name_numeric')
         classNamedata=className.objects.all()
@@ -141,12 +151,10 @@ def manage_class_submit_updated_data(request,class_id):
     if request.method=="POST":
 
         class_name=request.POST.get('class_name')
-        section=request.POST.get('section')
         class_name_numeric=request.POST.get('class_name_numeric')
         data=className.objects.get(class_id=class_id)   
         if data:
             data.class_name=class_name
-            data.section=section
             data.class_name_numeric=class_name_numeric
             data.save()
             return redirect('/adminpanel/manageclass')
@@ -176,8 +184,6 @@ def student_submit_data(request):
         for i in data:
             s=""
             s=s+str(i.class_name)
-            s=s+"-"
-            s=s+str(i.section)
             if s==class_id:
                 new_class_id=i.class_id
         data=student(
@@ -236,8 +242,6 @@ def manage_search_class_name(request):
         for i in all_data:
             s=""
             s=s+str(i.class_id.class_name)
-            s=s+"-"
-            s=s+str(i.class_id.section)
             if s==str(class_id):
                 data.append(i)
         return render(request,"manage_student.html",{'data':data})
@@ -382,6 +386,36 @@ def manage_add_subject_com(request):
     subject_data=subjects.objects.all()
     return render(request,"subject_com/manage_subject_com_add.html",{'class_data':class_data,'subject_data':subject_data})
 
+def manage_com_search_subject_com_id(request):
+    if request.method=="GET":
+        subject_com_id=request.GET.get('subject_com_id')
+        subject_com_data=subject_com.objects.all()
+        data=[]
+        for i in subject_com_data:
+            if str(i.subject_com_id)==str(subject_com_id):
+                data.append(i)       
+        return render(request,"subject_com/manage_subject_com.html",{'data':data})
+
+def manage_com_search_class_name(request):
+    if request.method=="GET":
+        class_name=request.GET.get('class_name')
+        subject_com_data=subject_com.objects.all()
+        data=[]
+        for i in subject_com_data:
+            if str(i.class_id.class_name)==str(class_name):
+                data.append(i)        
+        return render(request,"subject_com/manage_subject_com.html",{'data':data})
+
+def manage_com_search_subject_name(request):
+    if request.method=="GET":
+        subject_name=request.GET.get('subject_name')
+        subject_com_data=subject_com.objects.all()
+        data=[]
+        for i in subject_com_data:
+            if str(i.subject_id.subject_name)==str(subject_name):
+                data.append(i)        
+        return render(request,"subject_com/manage_subject_com.html",{'data':data})    
+
 def subject_com_submit_data(request):
     if request.method=="POST":
         class_name=request.POST.get('class_name')
@@ -420,7 +454,6 @@ def delete_result(request,result_id):
     data.delete()
     return redirect('/adminpanel/manage_result')
 
-
 def manage_result_add_data(request,class_name):
     if request.method=="POST":
 
@@ -441,5 +474,54 @@ def manage_result_add_data(request,class_name):
         return redirect('/adminpanel/manage_result')
     return HttpResponse("Hello World!")
 
+def manage_result_search_result_id(request):
+    if request.method=="GET":
+        result_id=request.GET.get('result_id')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.result_id)==str(result_id):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data})
+    
+def manage_result_search_student_name(request):
+    if request.method=="GET":
+        student_name=request.GET.get('student_name')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.student_id.name)==str(student_name):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data})
+
+def manage_result_search_class_name(request):
+    if request.method=="GET":
+        class_name=request.GET.get('class_name')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.class_id.class_name)==str(class_name):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data})    
+    
+def manage_result_search_subject_name(request):
+    if request.method=="GET":
+        subject_name=request.GET.get('subject_name')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.subject_id.subject_name)==str(subject_name):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data}) 
+       
+def manage_result_search_marks(request):
+    if request.method=="GET":
+        marks=request.GET.get('marks')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.marks)==str(marks):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data})    
 
 

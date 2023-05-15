@@ -8,6 +8,8 @@ urlpatterns = [
     path('',views.Home),
     path('show_result',views.show_result),
     path('<str:roll_no>/Feedback/',views.Feedback__),
+    path('<str:roll_no>/Reviews/',views.Reviews__),
     path('<str:roll_no>/Submit_Feedback/',views.Feedback_from),
+    path('<str:roll_no>/Submit_Reviews/',views.Reviews_from),
     path('adminpanel/',include('student.urls'))
 ]

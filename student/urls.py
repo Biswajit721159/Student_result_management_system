@@ -11,15 +11,21 @@ urlpatterns = [
     path('logout',views.Logout),
     path('logoutpage',views.logoutpage),
 
+    #manage_reviews
+    path('manage_reviews',views.manage_reviews),
+    path('manage_reviews/delete/<str:Reviews_id>',views.delete_Reviews),
+
+    #manage_feedback
+    path('manage_feedback',views.manage_feedback),
+    path('manage_feedback/delete/<str:Feedback_id>',views.delete_feedback),
     #manageclass
 
     path('manageclass',views.manageclass),
     path('manageclass/addclass',views.addclass),
     path('manageclass/submit_data',views.submit_data),
-    path('manageclass/search_class_id',views.manage_search_class_id),
-    path('manageclass/search_class_name',views.manage_search_class_name),
-    path('manageclass/search_section',views.manage_search_section),
-    path('manageclass/search_class_name_numeric',views.manage_search_class_name_numeric),
+    path('manageclass/search_class_id',views.manageclass_search_class_id),
+    path('manageclass/search_class_name',views.manageclass_search_class_name),
+    path('manageclass/search_class_name_numeric',views.manageclass_search_class_name_numeric),
     path('manageclass/update/<int:class_id>',views.class_update),
     path('manageclass/delete/<int:class_id>',views.class_delete),
     path('manageclass/update/<int:class_id>/submit_updated_data',views.manage_class_submit_updated_data),
@@ -56,6 +62,9 @@ urlpatterns = [
     path('manage_subject_com/delete/<int:subject_com_id>',views.delete_subject_com),
     path('manage_subject_com/add_subject_com',views.manage_add_subject_com),
     path('manage_subject_com/subject_com_submit_data',views.subject_com_submit_data),
+    path('manage_subject_com/search_subject_com_id',views.manage_com_search_subject_com_id),
+    path('manage_subject_com/search_class_name',views.manage_com_search_class_name),
+    path('manage_subject_com/search_subject_name',views.manage_com_search_subject_name),
 
 
     #manage_result
@@ -64,4 +73,9 @@ urlpatterns = [
     path('manage_result/addresult',views.addresult),
     path('manage_result/delete/<int:result_id>',views.delete_result),
     path('manage_result/search_class_name_to_add',views.search_class_name_to_add),
+    path('manage_result/search_result_id',views.manage_result_search_result_id),
+    path('manage_result/search_student_name',views.manage_result_search_student_name),
+    path('manage_result/search_class_name',views.manage_result_search_class_name),
+    path('manage_result/search_subject_name',views.manage_result_search_subject_name),
+    path('manage_result/search_marks',views.manage_result_search_marks),
 ]

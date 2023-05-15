@@ -59,21 +59,18 @@
     padding-left: 0px;
   }
 </style>
-
 <body class="body">
   {% if user.is_authenticated %}
   
-    <div class="container">
+    <div class="mx-3">
         <div class="table-wrapper">
             <div class="table-title" style="width: 85%;margin-left: 0%" >
                 <div class="row">
                     <div class="col-sm-6">
-                      <h2>Manage <b>Subject Combination</b></h2>
+                      <h2>Manage <b>Feedback</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="/adminpanel/manage_subject_com/add_subject_com" class="btn btn-success btn-sm"><span>Add Class</span></a>	
-                        <a href="/adminpanel/dashboard"><button class="btn btn-dark btn-sm">Back to main page</button></a>	
-                        <a href="/adminpanel/manage_subject_com"><button class="btn btn-dark btn-sm">Clear Search</button></a>				
+                        <a href="/adminpanel/dashboard"><button class="btn btn-dark btn-sm">Back to main page</button></a>					
                     </div>  
                 </div>
             </div>
@@ -81,33 +78,23 @@
                 <table class="table table-striped table-hover" style="width:85%;margin-left:0%;margin-top:2%">
                     <thead>
                         <tr>
-                            <th class="text-center">subject_com_id</th>
-                            <th class="text-center">class_name</th>
-                            <th class="text-center">subject_name</th>
+                            <th class="text-center">Feedback_id</th>
+                            <th class="text-center">roll_no</th>
+                            <th class="text-center">rating</th>
+                            <th class="text-center">Feedback_data</th>
                             <th class="text-center">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <form action="/adminpanel/manage_subject_com/search_subject_com_id" method="GET">
-                            <td><input type="search" class="searchInput" name="subject_com_id" class="form-control" placeholder="Search subject_com_id" aria-label="Search" /></td>
-                        </form>
-                        <form action="/adminpanel/manage_subject_com/search_class_name" method="GET">
-                            <td><input type="search" class="searchInput" name="class_name" class="form-control" placeholder="Search class_name" aria-label="Search" /></td>
-                        </form>
-                        <form action="/adminpanel/manage_subject_com/search_subject_name" method="GET">
-                            <td><input type="search" class="searchInput" name="subject_name" class="form-control" placeholder="Search subject_name" aria-label="Search" /></td>
-                        </form>
-                        <td colspan="1"></td>
-                        </tr>
                         {% if data %}
                             {% for i in data %}
                                 <tr>
-                                    <td>{{i.subject_com_id}}</td>
-                                    <td>{{i.class_id.class_name}}</td>
-                                    <td>{{i.subject_id.subject_name}}</td>
+                                    <td>{{i.Feedback_id}}</td>
+                                    <td>{{i.roll_no}}</td>
+                                    <td>{{i.rating}}</td>
+                                    <td>{{i.Feedback_data}}</td>
                                     <td>
-                                        <a href="/adminpanel/manage_subject_com/delete/{{i.subject_com_id}}" class="delete" ><button class="btn btn-danger btn-sm">Delete</button></a>
+                                        <a href="/adminpanel/manage_feedback/delete/{{i.Feedback_id}}" class="delete" ><button class="btn btn-danger btn-sm">Delete</button></a>
                                     </td>
                                 </tr>
                             {%endfor%}

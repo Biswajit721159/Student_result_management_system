@@ -3,7 +3,6 @@ from django.db import models
 class className(models.Model):
     class_id=models.AutoField(primary_key=True)
     class_name=models.CharField(max_length=100)
-    section=models.CharField(max_length=100)
     class_name_numeric=models.CharField(max_length=100)
 
 class student(models.Model):
@@ -38,4 +37,9 @@ class Feedback(models.Model):
     roll_no=models.CharField(max_length=100)
     Feedback_data=models.CharField(max_length=500)
     rating=models.CharField(max_length=100)
+
+class Reviews(models.Model):
+    Reviews_id=models.AutoField(primary_key=True)
+    roll_no=models.CharField(max_length=100)
+    Reviews_data=models.CharField(max_length=500)    
  
