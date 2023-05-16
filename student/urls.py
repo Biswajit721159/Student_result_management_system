@@ -78,4 +78,7 @@ urlpatterns = [
     path('manage_result/search_class_name',views.manage_result_search_class_name),
     path('manage_result/search_subject_name',views.manage_result_search_subject_name),
     path('manage_result/search_marks',views.manage_result_search_marks),
+    path('manage_result/update/<str:result_id>',views.update_result),
+    path('manage_result/manage_update_submit/<str:result_id>',views.manage_update_submit),
+
 ]

@@ -524,4 +524,15 @@ def manage_result_search_marks(request):
                 data.append(i)       
         return render(request,"result/manage_result.html",{'data':data})    
 
+def update_result(request,result_id):
+    data=result.objects.get(result_id=result_id)
+    return render(request,"result/manage_result_update.html",{'data':data})
 
+def manage_update_submit(request,result_id):
+    if request.method=="POST":
+        data=result.objects.get(result_id=result_id)
+        marks=request.POST.get('marks')
+        print(marks)
+        data.marks=marks
+        data.save()
+    return redirect('/adminpanel/manage_result')
