@@ -100,12 +100,22 @@ def submit_data(request):
     if request.method=="POST":
         class_name=request.POST.get('class_name')
         class_name_numeric=request.POST.get('class_name_numeric')
-        data=className(
-            class_name=class_name,
-            class_name_numeric=class_name_numeric,
-        )
-        data.save()
-        return redirect('/adminpanel/manageclass')
+        error_mess=[]
+        class_data=className.objects.all()
+        count=0
+        for i in class_data:
+            if (i.class_name==class_name) or (i.class_name_numeric==class_name_numeric):
+                count+=1
+                error_mess.append("Invalid Data")
+        if count:
+            return render(request,"manage_Add_class.html",{'error':error_mess})
+        else:            
+            data=className(
+                class_name=class_name,
+                class_name_numeric=class_name_numeric,
+            )
+            data.save()
+            return redirect('/adminpanel/manageclass')
     return HttpResponse("Wait sometime")
 
 def manageclass_search_class_id(request):
@@ -347,12 +357,22 @@ def subject_submit_data(request):
     if request.method=="POST":
         subject_name=request.POST.get('subject_name')
         subject_code=request.POST.get('subject_code')
-        data=subjects(
-            subject_name=subject_name,
-            subject_code=subject_code
-        )
-        data.save()
-        return redirect('/adminpanel/managesubject')
+        subject_data=subjects.objects.all()
+        error=[]
+        count=0
+        for i in subject_data:
+            if i.subject_name==subject_name or i.subject_code==subject_code:
+                count+=1
+                error.append("subject_name or subject_code is already use")
+        if count:
+            return render(request,"subject/manage_subject_add.html",{'error':error})
+        else:               
+            data=subjects(
+                subject_name=subject_name,
+                subject_code=subject_code
+            )
+            data.save()
+            return redirect('/adminpanel/managesubject')
     return HttpResponse("Wait for Responce")
 
 def subject_update_data(request,subject_id):
