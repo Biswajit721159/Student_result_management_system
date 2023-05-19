@@ -8,19 +8,19 @@
   </head>
   <body>
     <div class=" mt-3">
-        <h1 class="mx-5">Feedback From </h1>
+        <h1 class="mx-5" style="color:green;">Feedback From </h1>
         <form action="/{{roll_no}}/Submit_Feedback/" method="POST">
             {% csrf_token %} 
             <div class="col-md-4 mt-3 mx-5">
-                <label>Roll No</label>
+                <label style="color:green;">Roll No</label>
                 <input type="text" name="section" class="form-control" disabled placeholder="Enter section" value={{roll_no}}  required>
             </div>
             <div class="col-md-4 mt-3 mx-5">
-                <label>Enter Feedback</label>
+                <label style="color:green;">Enter Feedback</label>
                 <textarea type="text" name="Feedback_data" class="form-control" ></textarea>
             </div>
             <div class="col-md-4 mt-3 mx-5">
-                <label>Over all rating</label>
+                <label style="color:green;">Over all rating</label>
                 <select class="form-select form-select" name="rating" aria-label=".form-select-sm example">
                     <option  name="class_name">1</option>
                     <option  name="class_name">2</option>

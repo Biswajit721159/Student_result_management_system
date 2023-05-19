@@ -39,7 +39,6 @@
               <div class="col-md-4 mt-3">
                 <div class="form-group">
                   <select class="form-select form-select-sm" name="student_name" aria-label=".form-select-sm example">
-                  <option  name="student_name">Select student</option>
                   {%if student_data%}
                      {%for i in student_data%}
                      <option name="student_name">{{i.name}}</option>
@@ -60,6 +59,7 @@
                      <input type="text" name="{{i.subject_id.subject_name}}" class="form-control mt-2"  placeholder="Enter {{i.subject_id.subject_name}} Marks"  required>
                      {%endfor%}
                   {%else%}
+                  <option name="student_name" style="color:red;">You are not allow to add result </option>
                   {%endif%}
               </div>  
             </div> 

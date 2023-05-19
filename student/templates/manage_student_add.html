@@ -36,7 +36,6 @@
                   <div class="form-group">
                     <label>class_name</label>
                     <select class="form-select form-select-sm" name="class_id" aria-label=".form-select-sm example">
-                    <option  name="class_id">Select Class</option>
                     {%if data%}
                        {%for i in data%}
                        <option name="class_id">{{i.class_name}}</option>
@@ -74,7 +73,7 @@
                   <div class="col-md-4 mt-3">
                     <div class="form-group">
                       <label>DOB</label>
-                      <input type="text" name="dob" class="form-control" placeholder="Enter DOB"   required>
+                      <input type="date" name="dob" class="form-control" placeholder="Enter DOB"   required>
                     </div>
                   </div>
                 <div >

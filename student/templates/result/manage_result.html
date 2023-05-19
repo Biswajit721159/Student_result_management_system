@@ -82,6 +82,7 @@
                         <tr>
                             <th>Result_id</th>
                             <th>student_name</th>
+                            <th>Roll N0.</th>
                             <th>class_name</th>
                             <th>subject_name</th>
                             <th>Marks</th>
@@ -96,6 +97,9 @@
                         </form>
                         <form action="/adminpanel/manage_result/search_student_name" method="GET">
                           <td><input type="search" class="searchInput" name="student_name" class="form-control" placeholder="Search student_name" aria-label="Search" /></td>
+                        </form>
+                        <form action="/adminpanel/manage_result/search_roll_no" method="GET">
+                          <td><input type="search" class="searchInput" name="roll_no" class="form-control" placeholder="Search Roll No" aria-label="Search" /></td>
                         </form>
                         <form action="/adminpanel/manage_result/search_class_name" method="GET">
                             <td><input type="search" class="searchInput" name="class_name" class="form-control" placeholder="Search class_name" aria-label="Search" /></td>
@@ -113,6 +117,7 @@
                                 <tr>
                                     <td>{{i.result_id}}</td>
                                     <td>{{i.student_id.name}}</td> 
+                                    <td>{{i.student_id.roll_no}}</td>
                                     <td>{{i.class_id.class_name}}</td>
                                     <td>{{i.subject_id.subject_name}}</td>
                                     <td>{{i.marks}}</td>

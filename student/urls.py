@@ -76,6 +76,7 @@ urlpatterns = [
     path('manage_result/search_result_id',views.manage_result_search_result_id),
     path('manage_result/search_student_name',views.manage_result_search_student_name),
     path('manage_result/search_class_name',views.manage_result_search_class_name),
+    path('manage_result/search_roll_no',views.manage_result_search_roll_no),
     path('manage_result/search_subject_name',views.manage_result_search_subject_name),
     path('manage_result/search_marks',views.manage_result_search_marks),
     path('manage_result/update/<str:result_id>',views.update_result),

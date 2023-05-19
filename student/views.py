@@ -65,6 +65,7 @@ def dashboard(request):
             if(j.student_id.student_id)==i :
                 if int(j.marks)<=25:
                     set2.add(i)
+    print(len(class_data))                   
     context={
         'total_class':len(class_data),
         'total_student':len(student_data),
@@ -191,21 +192,38 @@ def student_submit_data(request):
         dob=request.POST.get('dob')
         new_class_id=0
         data=className.objects.all()
-        for i in data:
-            s=""
-            s=s+str(i.class_name)
-            if s==class_id:
-                new_class_id=i.class_id
-        data=student(
-            class_id=className.objects.get(class_id=new_class_id),
-            name=name,
-            roll_no=roll_no,
-            email=email,
-            gendar=gendar,
-            dob=dob
-        )  
-        data.save()      
-        return redirect('/adminpanel/managestudent')
+        error=[]
+        count=0
+        student_data=student.objects.all()
+        for i in student_data:
+            if str(i.email)==str(email):
+                count+=1
+                error.append("This mail id is already exit !!")
+                break
+        for i in student_data:
+            if str(i.class_id.class_name)==str(class_id) and str(i.roll_no)==str(roll_no):
+                 count+=1
+                 error.append("This roll number is already exit !!") 
+                 break
+        if count!=0:
+            data=className.objects.all()
+            return render(request,"manage_student_add.html",{'data':data,'error':error})
+        else:
+            for i in data:
+                s=""
+                s=s+str(i.class_name)
+                if s==class_id:
+                    new_class_id=i.class_id
+            data=student(
+                class_id=className.objects.get(class_id=new_class_id),
+                name=name,
+                roll_no=roll_no,
+                email=email,
+                gendar=gendar,
+                dob=dob
+            )  
+            data.save()      
+            return redirect('/adminpanel/managestudent')
     else:return HttpResponse("please wait")
 
 def delete_student(request,student_id):
@@ -466,6 +484,7 @@ def search_class_name_to_add(request):
         class_data=className.objects.get(class_name=class_name)
         student_data=student.objects.filter(class_id=class_data.class_id)
         subject_data=subject_com.objects.filter(class_id=class_data.class_id)
+        
         return render(request,"result/manage_result_add_adv.html",{'class_name':class_name,'student_data':student_data,'subject_data':subject_data})
     else:return HttpResponse("Wait sometime")
 
@@ -476,22 +495,32 @@ def delete_result(request,result_id):
 
 def manage_result_add_data(request,class_name):
     if request.method=="POST":
-
         student_name=request.POST.get('student_name')
         class_data=className.objects.get(class_name=class_name)
         subject_data=subject_com.objects.filter(class_id=class_data.class_id)
-
-        for i in subject_data:
-            s=i.subject_id.subject_name
-            s2=request.POST.get(s)
-            data=result(
-                class_id=className.objects.get(class_name=class_name),
-                student_id=student.objects.get(name=student_name),
-                marks=s2,
-                subject_id=subjects.objects.get(subject_name=s)
-            )
-            data.save()
-        return redirect('/adminpanel/manage_result')
+        result_data=result.objects.all()
+        count=0
+        class_id_all=className.objects.get(class_name=class_name)
+        student_id_all=student.objects.get(name=student_name)
+        print(class_id_all)
+        for i in result_data:
+            if str(i.class_id)==str(class_id_all) and str(i.student_id)==str(student_id_all):
+                count+=1
+                break
+        if count!=0:
+            return HttpResponse("This result is already exit")
+        else:
+            for i in subject_data:
+                s=i.subject_id.subject_name
+                s2=request.POST.get(s)
+                data=result(
+                    class_id=className.objects.get(class_name=class_name),
+                    student_id=student.objects.get(name=student_name),
+                    marks=s2,
+                    subject_id=subjects.objects.get(subject_name=s)
+                )
+                data.save()
+            return redirect('/adminpanel/manage_result')
     return HttpResponse("Hello World!")
 
 def manage_result_search_result_id(request):
@@ -533,7 +562,16 @@ def manage_result_search_subject_name(request):
             if str(i.subject_id.subject_name)==str(subject_name):
                 data.append(i)       
         return render(request,"result/manage_result.html",{'data':data}) 
-       
+
+def manage_result_search_roll_no(request):
+    if request.method=="GET":
+        roll_no=request.GET.get('roll_no')
+        result_data=result.objects.all()
+        data=[]
+        for i in result_data:
+            if str(i.student_id.roll_no)==str(roll_no):
+                data.append(i)       
+        return render(request,"result/manage_result.html",{'data':data})           
 def manage_result_search_marks(request):
     if request.method=="GET":
         marks=request.GET.get('marks')

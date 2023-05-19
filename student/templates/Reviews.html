@@ -8,16 +8,16 @@
   </head>
   <body>
     <div class=" mt-3">
-        <h1 class="mx-5">Reviews From </h1>
+        <h1 class="mx-5" style="color:green;">Reviews From </h1>
         <form action="/{{roll_no}}/Submit_Reviews/" method="POST">
             {% csrf_token %} 
             <div class="col-md-4 mt-3 mx-5">
-                <label>Roll No</label>
+                <label style="color:green;">Roll No</label>
                 <input type="text" name="section" class="form-control" disabled placeholder="Enter section" value={{roll_no}}  required>
             </div>
             <div class="col-md-4 mt-3 mx-5">
-                <label>Enter Your Subject</label>
-                <textarea type="text" name="Reviews_data" class="form-control" ></textarea>
+                <label style="color:green;">Enter Your Subject Name with Subject Code*</label>
+                <textarea type="text" name="Reviews_data" class="form-control mt-2" ></textarea>
             </div>
             <div class="col-md-4 mt-3 mx-5">
                 <button class="btn btn-primary">Submit</button>

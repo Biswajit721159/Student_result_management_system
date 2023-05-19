@@ -18,7 +18,7 @@
     margin:auto;
     height: 100%;
     width: 240px;
-    background: #B1B1EE;
+    background: #F9E5C5;
     transition: all 0.5s ease;
   }
 
@@ -144,66 +144,69 @@
   ol,ul {
     padding-left: 0px;
   }
+  a{
+    text-decoration:none;
+  }
   </style>
 <body class="body">
   {% if user.is_authenticated %}
   <div class="sidebar">
     <div class="logo-details">
-      <span class="logo_name">Welcome {{user.first_name}}</span>
+      <span class="logo_name" style="color:green;">Welcome {{user.first_name}}</span>
     </div>
       <ul class="nav-links">
         <li>
           <a href="/adminpanel/dashboard" class="active">
-             <i class='bx bx-grid-alt' ></i> 
-            <span class="links_name">Dashboard</span>
+             <i class='bx bx-grid-alt' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Dashboard</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/manageclass">
-             <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Class</span>
+             <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Class</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/managestudent">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Student</span>
+            <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Student</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/managesubject">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Subject</span>
+            <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Subject</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/manage_subject_com">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Class's Subject</span>
+            <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Class's Subject</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/manage_result">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Result</span>
+            <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Result</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/manage_reviews">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Reviews</span>
+            <i class='bx bx-box' style="color:orange;" ></i> 
+            <span class="links_name" style="color:green;">Manage Reviews</span>
           </a>
         </li>
         <li>
           <a href="/adminpanel/manage_feedback">
-            <i class='bx bx-box' ></i> 
-            <span class="links_name">Manage Feedback</span>
+            <i class='bx bx-box'  style="color:orange;"></i> 
+            <span class="links_name" style="color:green;">Manage Feedback</span>
           </a>
         </li>
         <li class="log_out">
           <a href="/adminpanel/logout">
-            {% comment %} <i class='bx bx-log-out'></i> {% endcomment %}
-            <span class="links_name">Log out</span>
+            <i class='bx bx-log-out' style="color:orange;"></i>
+            <span class="links_name" style="color:green;">Log out</span>
           </a>
         </li>  
       </ul>
@@ -212,56 +215,68 @@
     <div class="home-content">
       <div class="overview-boxes">
         <div class="box">
+          <a href="/adminpanel/managestudent"  >
             <div class="right-side">
-              <div class="box-topic" >Total Reg Student</div>
-              <div class="number">{{total_class}}</div>
+              <div class="box-topic" style="color:green;">Total Reg Student</div>
+              <div class="number" style="color:green;">{{total_student}}</div>
               <div class="indicator">
               </div>
             </div>
+          </a>
         </div>
         <div class="box">
+          <a href="/adminpanel/managesubject"  >
           <div class="right-side">
-            <div class="box-topic" >Subjects list</div>
-             <div class="number">{{total_student}}</div>
+            <div class="box-topic" style="color:green;">Subjects list</div>
+             <div class="number" style="color:green;">{{total_subject}}</div>
              <div class="indicator">
             </div>
           </div>
+        </a>
         </div>
         <div class="box">
+          <a href="/adminpanel/manageclass"  >
           <div class="right-side">
-            <div class="box-topic"  >Total class List</div>
-            <div class="number">{{total_subject}}</div>
+            <div class="box-topic" style="color:green;"  >Total class List</div>
+            <div class="number" style="color:green;">{{total_class}}</div>
+          </div>  
+        </a>
+        </div>
+        <div class="box" style="margin-top:13px">
+          <a href="/adminpanel/manage_result"  >
+          <div class="right-side">
+            <div class="box-topic" style="color:green;" >Result Declared</div>
+            <div class="number" style="color:green;">{{Total_result}}</div>
+          </div>  
+        </a>
+        </div>
+        <div class="box" style="margin-top:13px">
+          <div class="right-side">
+            <div class="box-topic"  style="color:green;">Total Pass candidates</div>
+            <div class="number" style="color:green;">{{Total_pass_candidates}}</div>
           </div>  
         </div>
         <div class="box" style="margin-top:13px">
           <div class="right-side">
-            <div class="box-topic"  >Result Declared</div>
-            <div class="number">{{Total_result}}</div>
+            <div class="box-topic" style="color:green;" >Total Fail candidates</div>
+            <div class="number" style="color:green;">{{Total_XP_candidates}}</div>
           </div>  
         </div>
         <div class="box" style="margin-top:13px">
+          <a href="/adminpanel/manage_reviews"  >
           <div class="right-side">
-            <div class="box-topic"  >Total Pass candidates</div>
-            <div class="number">{{Total_pass_candidates}}</div>
+            <div class="box-topic" style="color:green;" >Total Reviews</div>
+            <div class="number" style="color:green;">{{total_reviews}}</div>
           </div>  
+        </a>
         </div>
         <div class="box" style="margin-top:13px">
+          <a href="/adminpanel/manage_feedback"  >
           <div class="right-side">
-            <div class="box-topic"  >Total XP candidates</div>
-            <div class="number">{{Total_XP_candidates}}</div>
+            <div class="box-topic" style="color:green;" >Total Feedback</div>
+            <div class="number" style="color:green;">{{total_feedback}}</div>
           </div>  
-        </div>
-        <div class="box" style="margin-top:13px">
-          <div class="right-side">
-            <div class="box-topic"  >Total Reviews</div>
-            <div class="number">{{total_reviews}}</div>
-          </div>  
-        </div>
-        <div class="box" style="margin-top:13px">
-          <div class="right-side">
-            <div class="box-topic"  >Total Feedback</div>
-            <div class="number">{{total_feedback}}</div>
-          </div>  
+        </a>
         </div>
         
 
