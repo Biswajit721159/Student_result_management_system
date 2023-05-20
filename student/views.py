@@ -195,11 +195,11 @@ def student_submit_data(request):
         error=[]
         count=0
         student_data=student.objects.all()
-        for i in student_data:
-            if str(i.email)==str(email):
-                count+=1
-                error.append("This mail id is already exit !!")
-                break
+        # for i in student_data:
+        #     if str(i.email)==str(email):
+        #         count+=1
+        #         error.append("This mail id is already exit !!")
+        #         break
         for i in student_data:
             if str(i.class_id.class_name)==str(class_id) and str(i.roll_no)==str(roll_no):
                  count+=1
@@ -492,30 +492,32 @@ def delete_result(request,result_id):
     data=result.objects.get(result_id=result_id)
     data.delete()
     return redirect('/adminpanel/manage_result')
-
+@csrf_exempt
 def manage_result_add_data(request,class_name):
     if request.method=="POST":
-        student_name=request.POST.get('student_name')
-        class_data=className.objects.get(class_name=class_name)
-        subject_data=subject_com.objects.filter(class_id=class_data.class_id)
+        roll_no=request.POST.get('roll_no')
         result_data=result.objects.all()
         count=0
-        class_id_all=className.objects.get(class_name=class_name)
-        student_id_all=student.objects.get(name=student_name)
-        print(class_id_all)
         for i in result_data:
-            if str(i.class_id)==str(class_id_all) and str(i.student_id)==str(student_id_all):
+            if str(i.class_id.class_name)==str(class_name) and str(i.student_id.roll_no)==str(roll_no):
                 count+=1
                 break
         if count!=0:
             return HttpResponse("This result is already exit")
         else:
+            class_data=className.objects.get(class_name=class_name)
+            subject_data=subject_com.objects.filter(class_id=class_data.class_id)
             for i in subject_data:
                 s=i.subject_id.subject_name
                 s2=request.POST.get(s)
+                id=0
+                student_data=student.objects.all()
+                for i in student_data:
+                    if str(i.class_id.class_name)==str(class_name) and str(i.roll_no)==str(roll_no):
+                        id=i
                 data=result(
                     class_id=className.objects.get(class_name=class_name),
-                    student_id=student.objects.get(name=student_name),
+                    student_id=id,
                     marks=s2,
                     subject_id=subjects.objects.get(subject_name=s)
                 )

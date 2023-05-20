@@ -38,13 +38,13 @@
            
               <div class="col-md-4 mt-3">
                 <div class="form-group">
-                  <select class="form-select form-select-sm" name="student_name" aria-label=".form-select-sm example">
+                  <select class="form-select form-select-sm" name="roll_no" aria-label=".form-select-sm example">
                   {%if student_data%}
                      {%for i in student_data%}
-                     <option name="student_name">{{i.name}}</option>
+                     <option name="roll_no">{{i.roll_no}}</option>
                      {%endfor%}
                   {%else%}
-                  <option name="student_name">You are not allow</option>
+                  <option name="roll_no">You are not allow</option>
                   {%endif%}
                   </select>
               </div>  

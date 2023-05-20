@@ -22,11 +22,12 @@ def show_result(request):
     if request.method=="GET":
       email=request.GET.get('email')
       roll_no=request.GET.get('roll_no')
+      class_number=request.GET.get('class_number')
       class_name=""
       result_data=result.objects.all()
       data=[]
       for i in result_data:
-         if(i.student_id.roll_no)==roll_no and (i.student_id.email)==email:
+         if(i.student_id.roll_no)==roll_no and (i.student_id.email)==email and str(i.class_id.class_name_numeric)==str(class_number):
             data.append(i)
             class_name=i.class_id.class_name
 
