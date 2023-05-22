@@ -10,6 +10,8 @@ urlpatterns = [
     path('dashboard',views.dashboard,name="dashboard"),
     path('logout',views.Logout),
     path('logoutpage',views.logoutpage),
+    path('search_top_candidates',views.search_top_candidates),
+    path('search_class_name_to_find_top_candidates',views.search_class_name_to_find_top_candidates),
 
     #manage_reviews
     path('manage_reviews',views.manage_reviews),

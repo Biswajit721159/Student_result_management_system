@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="shop/style.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    {% load static %}  
+
+<body class="body">
+  {% if user.is_authenticated %}
+  <body>
+      <div class ="container mt-5">
+        <div class="row">
+          <div class="col">
+            <div class="col-sm-10">
+              <a href="/adminpanel/dashboard"><button class="btn btn-dark btn-sm">Back to main page</button></a>				
+          </div>  
+          </div>
+        </div> 
+            <form action="/adminpanel/search_class_name_to_find_top_candidates" method="post">
+              {% csrf_token %}
+              <div class="col-md-4 mt-3">
+                  <div class="form-group">
+                    <select class="form-select form-select mt-3" name="class_name" aria-label=".form-select-sm example">
+                    {%if data%}
+                       {%for i in data%}
+                       <option name="class_name">{{i.class_name}}</option>
+                       {%endfor%}
+                    {%else%}
+                    <option name="class_name">You are not allow</option>
+                    {%endif%}
+                    </select>
+                </div>  
+              </div>  
+            <div >
+              <input type="submit" class="btn btn-success mx-2 mt-3" value="Searching">
+            </div>
+            </form>
+            <div class="mt-1 mb-5 pb-1">
+              {% for message in error%}
+              <p class='message'>{{message}}</p>
+              {%endfor%}
+            </div>    
+      </div>
+            
+          {%else%}
+            <h2 class="logout"> You are Logged Out<h1>
+          {%endif%}
+
+</body>
+</html>

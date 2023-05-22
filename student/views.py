@@ -592,7 +592,29 @@ def manage_update_submit(request,result_id):
     if request.method=="POST":
         data=result.objects.get(result_id=result_id)
         marks=request.POST.get('marks')
-        print(marks)
         data.marks=marks
         data.save()
     return redirect('/adminpanel/manage_result')
+
+
+def search_top_candidates(request):
+    data=className.objects.all()
+    return render(request,"search_top_candidates.html",{'data':data})
+
+def search_class_name_to_find_top_candidates(request):
+    if request.method=="POST":
+        class_name=request.POST.get('class_name')
+        data=[]
+        result_data=result.objects.all()
+        student_data=student.objects.all()
+        mp = {}
+        for i in student_data:
+            for j in result_data:
+                if str(i.roll_no)==str(j.student_id.roll_no) and str(class_name)==str(j.class_id.class_name):
+                    if j in mp:
+                        mp[j]=mp[j]+int(j.marks)
+                    else:
+                        mp[j]=int(j.marks) 
+        for i in mp:
+            print(i)                  
+    return HttpResponse("EHHE")
