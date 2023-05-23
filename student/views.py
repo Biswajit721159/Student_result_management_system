@@ -608,13 +608,53 @@ def search_class_name_to_find_top_candidates(request):
         result_data=result.objects.all()
         student_data=student.objects.all()
         mp = {}
+        st=set()
         for i in student_data:
             for j in result_data:
                 if str(i.roll_no)==str(j.student_id.roll_no) and str(class_name)==str(j.class_id.class_name):
-                    if j in mp:
-                        mp[j]=mp[j]+int(j.marks)
-                    else:
-                        mp[j]=int(j.marks) 
-        for i in mp:
-            print(i)                  
-    return HttpResponse("EHHE")
+                    st.add(j) 
+        nums=[]            
+        for i in st: 
+            nums.append(i)
+
+
+
+        for i in nums:
+            count=0
+            for j in data:
+                if str(j['roll_no'])==str(i.student_id.roll_no):
+                  count+=1
+            if count==0:
+                total_mark=0
+                for j in nums:
+                    if str(i.student_id.roll_no)==str(j.student_id.roll_no):
+                        count+=1
+                        total_mark+=int(j.marks)        
+                obj={
+                    'name':"",
+                    'roll_no':-1,
+                    'class':'',
+                    'marks':-1,
+                    'number_subject':0,
+                    'persentage':0,
+                }
+                obj['name']=i.student_id.name
+                obj['roll_no']=i.student_id.roll_no
+                obj['class']=i.class_id.class_name
+                obj['marks']=total_mark
+                obj['number_subject']=count
+                obj['persentage']=round((total_mark/count),2)
+                data.append(obj)
+        length =len(data)  
+
+        for i in range(length-1):  
+            minIndex = i  
+            for j in range(i+1, length):  
+                if data[j]['marks']>data[minIndex]['marks']:  
+                  minIndex = j    
+            data[i], data[minIndex] = data[minIndex], data[i]  
+
+
+        return render(request,"show_shorting.html",{'data':data})           
+    return HttpResponse("Hello World!")
+
